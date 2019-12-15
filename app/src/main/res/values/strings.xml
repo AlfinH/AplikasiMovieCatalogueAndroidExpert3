@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">AplikasiMovieCatalogueAndroidExpert3</string>
+
+    <string name="tab_movie">Film</string>
+    <string name="tab_tv_show">Tayangan Tv</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="change_language_settings">pengaturan</string>
+    <string name="judul">judul</string>
+    <string name="tanggal_rilis">tgl_rilis</string>
+    <string name="dummy_text">asdfg</string>
+    <string name="genre">Jenis</string>
 </resources>
