@@ -14,9 +14,7 @@ import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.SectionsPagerAdapt
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-    //edd435e43acb8e79c6086d1bf4b5394d API
-    //get Up Coming Url
-    //https://api.themoviedb.org/3/movie/upcoming?api_key=edd435e43acb8e79c6086d1bf4b5394d&language=en-US&page=1
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

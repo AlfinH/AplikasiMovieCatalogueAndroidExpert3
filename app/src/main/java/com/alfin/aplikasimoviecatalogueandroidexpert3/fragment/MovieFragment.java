@@ -2,21 +2,32 @@ package com.alfin.aplikasimoviecatalogueandroidexpert3.fragment;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieAsyncTaskLoader;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.model.Movie;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 
 import java.util.ArrayList;
@@ -25,10 +36,13 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment {
+public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Movie>>{
 
     private RecyclerView rvMovies;
+    private MovieAdapter adapter;
     private ArrayList<MovieTvShow> list = new ArrayList<>();
+
+    static final String EXTRAS_LANG = "EXTRAS_LANG";
 
     public MovieFragment() {
         // Required empty public constructor
@@ -46,48 +60,47 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter = new MovieAdapter();
+        adapter.notifyDataSetChanged();
+
         rvMovies = view.findViewById(R.id.rv_movies);
-        rvMovies.setHasFixedSize(true);
-
-//        list.addAll(getListMovies());
-        showRecyclerView();
-    }
-
-    private void showRecyclerView(){
         rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
-        MovieTvShowAdapter movieTvShowAdapter = new MovieTvShowAdapter(list);
-        rvMovies.setAdapter(movieTvShowAdapter);
+        rvMovies.setAdapter(adapter);
 
-        movieTvShowAdapter.setOnItemClickCallback(new MovieTvShowAdapter.OnItemClickCallback() {
+        adapter.setOnItemClickCallback(new MovieAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(MovieTvShow data) {
-                showSelectedMovieTvShow(data);
+            public void onItemClicked(Movie data) {
+                showSelectedMovie(data);
             }
         });
+
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRAS_LANG, getResources().getString(R.string.language));
+
+        getLoaderManager().initLoader(0, bundle, this);
     }
 
-    private void showSelectedMovieTvShow(MovieTvShow data) {
-        Intent intent = new Intent(getContext(), DetailMovieTvShowActivity.class);
-        intent.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW,data);
-        startActivity(intent);
+    @NonNull
+    @Override
+    public Loader<ArrayList<Movie>> onCreateLoader(int id, @Nullable Bundle args) {
+        String language = getResources().getString(R.string.language);
+        if (args != null) {
+            language = args.getString(EXTRAS_LANG);
+        }
+        return new MovieAsyncTaskLoader(getContext(), language);
     }
 
-//    private ArrayList<MovieTvShow> getListMovies() {
-//        TypedArray dataGambar = getResources().obtainTypedArray(R.array.gambar_movie);
-//        String[] dataName = getResources().getStringArray(R.array.judul_movie);
-//        String[] dataDate = getResources().getStringArray(R.array.tgl_release_movie);
-//        String[] dataGenre = getResources().getStringArray(R.array.genre_movie);
-//        String[] dataDescription = getResources().getStringArray(R.array.deskripsi_movie);
-//        ArrayList<MovieTvShow> listMovieTvShow = new ArrayList<>();
-//        for (int i = 0; i < dataName.length; i++) {
-//            MovieTvShow movieTvShow = new MovieTvShow();
-//            movieTvShow.setGambar(dataGambar.getResourceId(i,0));
-//            movieTvShow.setJudul(dataName[i]);
-//            movieTvShow.setTanggal_rilis(dataDate[i]);
-//            movieTvShow.setGenre(dataGenre[i]);
-//            movieTvShow.setDeskripsi(dataDescription[i]);
-//            listMovieTvShow.add(movieTvShow);
-//        }
-//        return listMovieTvShow;
-//    }
+    @Override
+    public void onLoadFinished(@NonNull Loader<ArrayList<Movie>> loader, ArrayList<Movie> data) {
+        adapter.setData(data);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<ArrayList<Movie>> loader) {
+        adapter.setData(null);
+    }
+
+    private void showSelectedMovie(Movie data) {
+        Toast.makeText(getContext(), "Kamu memilih " + data.getJudul(), Toast.LENGTH_SHORT).show();
+    }
 }
