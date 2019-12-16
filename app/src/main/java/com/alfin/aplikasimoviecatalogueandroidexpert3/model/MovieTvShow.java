@@ -4,17 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class MovieTvShow implements Parcelable {
-    private int gambar;
+    private String gambar;
     private String judul,tanggal_rilis,genre,deskripsi;
 
     public MovieTvShow() {
     }
 
-    public int getGambar() {
+    public String getGambar() {
         return gambar;
     }
 
-    public void setGambar(int gambar) {
+    public void setGambar(String gambar) {
         this.gambar = gambar;
     }
 
@@ -51,7 +51,7 @@ public class MovieTvShow implements Parcelable {
     }
 
     protected MovieTvShow(Parcel in) {
-        gambar = in.readInt();
+        gambar = in.readString();
         judul = in.readString();
         tanggal_rilis = in.readString();
         genre = in.readString();
@@ -77,7 +77,7 @@ public class MovieTvShow implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(gambar);
+        dest.writeString(gambar);
         dest.writeString(judul);
         dest.writeString(tanggal_rilis);
         dest.writeString(genre);

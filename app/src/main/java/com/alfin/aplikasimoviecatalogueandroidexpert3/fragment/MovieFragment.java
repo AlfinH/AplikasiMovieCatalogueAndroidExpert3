@@ -2,10 +2,7 @@ package com.alfin.aplikasimoviecatalogueandroidexpert3.fragment;
 
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieAsyncTaskLoader;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieViewModel;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.Movie;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 
@@ -36,11 +30,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Movie>>{
+public class MovieFragment extends Fragment{
 
-    private RecyclerView rvMovies;
     private MovieAdapter adapter;
-    private ArrayList<MovieTvShow> list = new ArrayList<>();
+
+    private ProgressBar progressBar;
+    private MovieViewModel movieViewModel;
 
     static final String EXTRAS_LANG = "EXTRAS_LANG";
 
@@ -60,12 +55,12 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        progressBar = view.findViewById(R.id.progressBar);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_movies);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new MovieAdapter();
         adapter.notifyDataSetChanged();
-
-        rvMovies = view.findViewById(R.id.rv_movies);
-        rvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMovies.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickCallback(new MovieAdapter.OnItemClickCallback() {
             @Override
@@ -74,33 +69,41 @@ public class MovieFragment extends Fragment implements LoaderManager.LoaderCallb
             }
         });
 
-        Bundle bundle = new Bundle();
-        bundle.putString(EXTRAS_LANG, getResources().getString(R.string.language));
+        movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
 
-        getLoaderManager().initLoader(0, bundle, this);
-    }
+        movieViewModel.setMovies(getResources().getString(R.string.language));
+        showLoading(true);
 
-    @NonNull
-    @Override
-    public Loader<ArrayList<Movie>> onCreateLoader(int id, @Nullable Bundle args) {
-        String language = getResources().getString(R.string.language);
-        if (args != null) {
-            language = args.getString(EXTRAS_LANG);
-        }
-        return new MovieAsyncTaskLoader(getContext(), language);
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<ArrayList<Movie>> loader, ArrayList<Movie> data) {
-        adapter.setData(data);
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<ArrayList<Movie>> loader) {
-        adapter.setData(null);
+        movieViewModel.getMovies().observe(this, new Observer<ArrayList<Movie>>() {
+            @Override
+            public void onChanged(ArrayList<Movie> movieItems) {
+                if (movieItems != null) {
+                    adapter.setData(movieItems);
+                    showLoading(false);
+                }
+            }
+        });
     }
 
     private void showSelectedMovie(Movie data) {
-        Toast.makeText(getContext(), "Kamu memilih " + data.getJudul(), Toast.LENGTH_SHORT).show();
+        Intent detailMovie = new Intent(getContext(), DetailMovieTvShowActivity.class);
+
+        MovieTvShow movieTvShow = new MovieTvShow();
+        movieTvShow.setGambar("https://image.tmdb.org/t/p/original" + data.getGambar());
+        movieTvShow.setJudul(data.getJudul());
+        movieTvShow.setTanggal_rilis(data.getJudul());
+        movieTvShow.setGenre(data.getGenre());
+        movieTvShow.setDeskripsi(data.getDeskripsi());
+
+        detailMovie.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW, movieTvShow);
+        startActivity(detailMovie);
+    }
+
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

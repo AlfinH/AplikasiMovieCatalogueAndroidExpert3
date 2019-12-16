@@ -2,7 +2,6 @@ package com.alfin.aplikasimoviecatalogueandroidexpert3.fragment;
 
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 
 import java.util.ArrayList;
@@ -54,15 +52,15 @@ public class TvShowFragment extends Fragment {
 
     private void showRecyclerView(){
         rvTvShows.setLayoutManager(new LinearLayoutManager(getContext()));
-        MovieTvShowAdapter movieTvShowAdapter = new MovieTvShowAdapter(list);
-        rvTvShows.setAdapter(movieTvShowAdapter);
+//        MovieTvShowAdapter movieTvShowAdapter = new MovieTvShowAdapter(list);
+//        rvTvShows.setAdapter(movieTvShowAdapter);
         
-        movieTvShowAdapter.setOnItemClickCallback(new MovieTvShowAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(MovieTvShow data) {
-                showSelectedMovieTvShow(data);
-            }
-        });
+//        movieTvShowAdapter.setOnItemClickCallback(new MovieTvShowAdapter.OnItemClickCallback() {
+//            @Override
+//            public void onItemClicked(MovieTvShow data) {
+//                showSelectedMovieTvShow(data);
+//            }
+//        });
     }
 
     private void showSelectedMovieTvShow(MovieTvShow data) {
