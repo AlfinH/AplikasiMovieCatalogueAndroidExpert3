@@ -37,8 +37,6 @@ public class MovieFragment extends Fragment{
     private ProgressBar progressBar;
     private MovieViewModel movieViewModel;
 
-    static final String EXTRAS_LANG = "EXTRAS_LANG";
-
     public MovieFragment() {
         // Required empty public constructor
     }

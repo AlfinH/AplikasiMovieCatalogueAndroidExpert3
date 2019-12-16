@@ -6,16 +6,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieAdapter;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.TvShowAdapter;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieViewModel;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.TvShowViewModel;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.model.Movie;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.model.TvShow;
 
 import java.util.ArrayList;
 
@@ -25,8 +34,10 @@ import java.util.ArrayList;
  */
 public class TvShowFragment extends Fragment {
 
-    private RecyclerView rvTvShows;
-    private ArrayList<MovieTvShow> list = new ArrayList<>();
+    private TvShowAdapter adapter;
+
+    private ProgressBar progressBar;
+    private TvShowViewModel tvShowViewModel;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -43,48 +54,55 @@ public class TvShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvTvShows = view.findViewById(R.id.rv_tvshows);
-        rvTvShows.setHasFixedSize(true);
+        progressBar = view.findViewById(R.id.progressBar);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_tvshows);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new TvShowAdapter();
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
 
-//        list.addAll(getListMovies());
-        showRecyclerView();
+        adapter.setOnItemClickCallback(new TvShowAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(TvShow data) {
+                showSelectedTvShow(data);
+            }
+        });
+
+        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowViewModel.class);
+
+        tvShowViewModel.setTvShows(getResources().getString(R.string.language));
+        showLoading(true);
+
+        tvShowViewModel.getTvShows().observe(this, new Observer<ArrayList<TvShow>>() {
+            @Override
+            public void onChanged(ArrayList<TvShow> tvShowItems) {
+                if (tvShowItems != null) {
+                    adapter.setData(tvShowItems);
+                    showLoading(false);
+                }
+            }
+        });
     }
 
-    private void showRecyclerView(){
-        rvTvShows.setLayoutManager(new LinearLayoutManager(getContext()));
-//        MovieTvShowAdapter movieTvShowAdapter = new MovieTvShowAdapter(list);
-//        rvTvShows.setAdapter(movieTvShowAdapter);
-        
-//        movieTvShowAdapter.setOnItemClickCallback(new MovieTvShowAdapter.OnItemClickCallback() {
-//            @Override
-//            public void onItemClicked(MovieTvShow data) {
-//                showSelectedMovieTvShow(data);
-//            }
-//        });
+    private void showSelectedTvShow(TvShow data) {
+        Intent detailMovie = new Intent(getContext(), DetailMovieTvShowActivity.class);
+
+        MovieTvShow movieTvShow = new MovieTvShow();
+        movieTvShow.setGambar("https://image.tmdb.org/t/p/original" + data.getGambar());
+        movieTvShow.setJudul(data.getJudul());
+        movieTvShow.setTanggal_rilis(data.getJudul());
+        movieTvShow.setGenre(data.getGenre());
+        movieTvShow.setDeskripsi(data.getDeskripsi());
+
+        detailMovie.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW, movieTvShow);
+        startActivity(detailMovie);
     }
 
-    private void showSelectedMovieTvShow(MovieTvShow data) {
-        Intent intent = new Intent(getContext(), DetailMovieTvShowActivity.class);
-        intent.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW,data);
-        startActivity(intent);
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
-
-//    private ArrayList<MovieTvShow> getListMovies() {
-//        TypedArray dataGambar = getResources().obtainTypedArray(R.array.gambar_tv_show);
-//        String[] dataName = getResources().getStringArray(R.array.judul_tv_show);
-//        String[] dataDate = getResources().getStringArray(R.array.tgl_release_tv_show);
-//        String[] dataGenre = getResources().getStringArray(R.array.genre_tv_show);
-//        String[] dataDescription = getResources().getStringArray(R.array.deskripsi_tv_show);
-//        ArrayList<MovieTvShow> listMovieTvShow = new ArrayList<>();
-//        for (int i = 0; i < dataName.length; i++) {
-//            MovieTvShow movieTvShow = new MovieTvShow();
-//            movieTvShow.setGambar(dataGambar.getResourceId(i,0));
-//            movieTvShow.setJudul(dataName[i]);
-//            movieTvShow.setTanggal_rilis(dataDate[i]);
-//            movieTvShow.setGenre(dataGenre[i]);
-//            movieTvShow.setDeskripsi(dataDescription[i]);
-//            listMovieTvShow.add(movieTvShow);
-//        }
-//        return listMovieTvShow;
-//    }
 }
