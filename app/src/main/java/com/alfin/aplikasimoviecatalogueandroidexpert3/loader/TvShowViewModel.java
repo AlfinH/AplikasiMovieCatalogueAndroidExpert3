@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.TvShow;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
 public class TvShowViewModel extends ViewModel {
-    private static final String API_KEY = "edd435e43acb8e79c6086d1bf4b5394d";
+    private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private MutableLiveData<ArrayList<TvShow>> listTvShows = new MutableLiveData<>();
 
     public void setTvShows(final String language) {

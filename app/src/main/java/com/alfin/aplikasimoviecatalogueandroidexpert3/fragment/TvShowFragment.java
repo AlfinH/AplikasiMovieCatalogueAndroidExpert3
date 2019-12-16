@@ -37,7 +37,6 @@ public class TvShowFragment extends Fragment {
     private TvShowAdapter adapter;
 
     private ProgressBar progressBar;
-    private TvShowViewModel tvShowViewModel;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -68,7 +67,7 @@ public class TvShowFragment extends Fragment {
             }
         });
 
-        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowViewModel.class);
+        TvShowViewModel tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TvShowViewModel.class);
 
         tvShowViewModel.setTvShows(getResources().getString(R.string.language));
         showLoading(true);
