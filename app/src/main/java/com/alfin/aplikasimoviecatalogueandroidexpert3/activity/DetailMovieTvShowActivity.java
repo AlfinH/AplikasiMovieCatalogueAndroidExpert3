@@ -1,10 +1,14 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
@@ -18,12 +22,20 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
     private TextView txtJudul,txtGenre,txtTanggal,txtDeskripsi;
     private ImageView imgGambar;
 
+    private Menu menu;
+    private boolean isFavorite = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie_tv_show);
 
         MovieTvShow movieTvShow = getIntent().getParcelableExtra(EXTRA_MOVIE_TVSHOW);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Detail");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         txtJudul = findViewById(R.id.tv_judul_detail);
         txtGenre = findViewById(R.id.tv_genre_detail);
@@ -42,4 +54,41 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
                     .into(imgGambar);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.detail_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        changeMenuIcon();
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_fav:
+                isFavorite = false;
+                changeMenuIcon();
+                break;
+            case R.id.action_fav_border:
+                isFavorite=true;
+                changeMenuIcon();
+                break;
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void changeMenuIcon() {
+        menu.findItem(R.id.action_fav).setVisible(isFavorite);
+        menu.findItem(R.id.action_fav_border).setVisible(!isFavorite);
+    }
+
 }

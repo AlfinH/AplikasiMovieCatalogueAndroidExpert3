@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.MovieFragment;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.TvShowFragment;
@@ -24,7 +25,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private final int[] TAB_TITLES = new int[]{
             R.string.tab_movie,
-            R.string.tab_tv_show
+            R.string.tab_tv_show,
+            R.string.tab_fav
     };
 
     @Override
@@ -36,6 +38,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 1:
                 fragment = new TvShowFragment();
+                break;
+            case 2:
+                fragment = new FavoriteFragment();
                 break;
         }
         return fragment;
@@ -49,6 +54,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

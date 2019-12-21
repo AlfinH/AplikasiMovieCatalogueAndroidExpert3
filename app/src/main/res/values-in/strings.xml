@@ -4,6 +4,7 @@
 
     <string name="tab_movie">Film</string>
     <string name="tab_tv_show">Tayangan Tv</string>
+    <string name="tab_fav">Favorit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Halo fragment kosong</string>
@@ -14,4 +15,5 @@
     <string name="genre">Jenis</string>
 
     <string name="language">id-ID</string>
+
 </resources>

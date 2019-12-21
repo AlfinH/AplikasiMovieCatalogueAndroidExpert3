@@ -3,6 +3,7 @@
 
     <string name="tab_movie">Movie</string>
     <string name="tab_tv_show">Tv Show</string>
+    <string name="tab_fav">Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,4 +14,5 @@
     <string name="genre">Genre</string>
 
     <string name="language">en-US</string>
+
 </resources>
