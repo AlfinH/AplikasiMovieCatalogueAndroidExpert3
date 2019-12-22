@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class Movie {
     private int id;
-    private String judul,tanggal_rilis,deskripsi,genre,gambar;
+    private String judul, tanggal_rilis, deskripsi, genre, gambar;
 
     public Movie() {
     }
@@ -18,10 +18,10 @@ public class Movie {
             String tanggal_rilis = object.getString("release_date");
             String genre = "";
             JSONArray genreArr = object.getJSONArray("genre_ids");
-            for(int i = 0;i<genreArr.length();i++){
-                if(i == 0){
+            for (int i = 0; i < genreArr.length(); i++) {
+                if (i == 0) {
                     genre += toGenre(genreArr.getInt(i));
-                }else{
+                } else {
                     genre += ", " + toGenre(genreArr.getInt(i));
                 }
             }
@@ -40,7 +40,7 @@ public class Movie {
 
     private String toGenre(int id) {
         String genre = "";
-        switch (id){
+        switch (id) {
             case 28:
                 genre = "Action";
                 break;

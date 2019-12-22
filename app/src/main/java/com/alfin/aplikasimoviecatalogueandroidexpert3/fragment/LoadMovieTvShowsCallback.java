@@ -6,5 +6,6 @@ import java.util.ArrayList;
 
 public interface LoadMovieTvShowsCallback {
     void preExecute();
+
     void postExecute(ArrayList<MovieTvShow> movieTvShows);
 }

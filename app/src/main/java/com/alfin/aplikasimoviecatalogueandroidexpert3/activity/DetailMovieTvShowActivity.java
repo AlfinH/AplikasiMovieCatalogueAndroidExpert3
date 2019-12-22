@@ -5,14 +5,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
@@ -33,7 +31,7 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE_TVSHOW = "movie_tvshow";
 
-    private TextView txtJudul,txtGenre,txtTanggal,txtDeskripsi;
+    private TextView txtJudul, txtGenre, txtTanggal, txtDeskripsi;
     private ImageView imgGambar;
 
     private Menu menu;
@@ -53,13 +51,13 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
         movieTvShow = getIntent().getParcelableExtra(EXTRA_MOVIE_TVSHOW);
         if (movieTvShow == null) {
             movieTvShow = new MovieTvShow();
-        }else {
+        } else {
             uriWithId = Uri.parse(CONTENT_URI + "/" + movieTvShow.getId());
             if (uriWithId != null) {
                 Cursor cursor = getContentResolver().query(uriWithId, null, null, null, null);
                 if (cursor != null) {
                     MovieTvShow temp = MappingHelper.mapCursorToObject(cursor);
-                    if(temp != null){
+                    if (temp != null) {
                         isFavorite = true;
                     }
                     cursor.close();
@@ -78,7 +76,7 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
         txtDeskripsi = findViewById(R.id.tv_deskripsi_detail);
         imgGambar = findViewById(R.id.iv_gambar_detail);
 
-        if(movieTvShow != null){
+        if (movieTvShow != null) {
             txtJudul.setText(movieTvShow.getJudul());
             txtGenre.setText(movieTvShow.getGenre());
             txtTanggal.setText(movieTvShow.getTanggal_rilis());
@@ -113,7 +111,7 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
                 changeMenuIcon();
                 break;
             case R.id.action_fav_border:
-                isFavorite=true;
+                isFavorite = true;
                 // Gunakan content uri untuk insert
                 // content://com.alfin.mynotesapp/note/
                 ContentValues values = new ContentValues();

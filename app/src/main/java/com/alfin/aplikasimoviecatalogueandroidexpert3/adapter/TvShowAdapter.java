@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
-
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.TvShow;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

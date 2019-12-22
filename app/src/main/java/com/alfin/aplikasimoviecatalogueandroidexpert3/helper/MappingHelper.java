@@ -26,7 +26,7 @@ public class MappingHelper {
 
     public static MovieTvShow mapCursorToObject(Cursor movieTvShowsCursor) {
         movieTvShowsCursor.moveToFirst();
-        if(movieTvShowsCursor.getCount() > 0){
+        if (movieTvShowsCursor.getCount() > 0) {
             int id = movieTvShowsCursor.getInt(movieTvShowsCursor.getColumnIndexOrThrow(DatabaseContract.MovieTvShowColumns.ID));
             String title = movieTvShowsCursor.getString(movieTvShowsCursor.getColumnIndexOrThrow(DatabaseContract.MovieTvShowColumns.TITLE));
             String description = movieTvShowsCursor.getString(movieTvShowsCursor.getColumnIndexOrThrow(DatabaseContract.MovieTvShowColumns.DESCRIPTION));

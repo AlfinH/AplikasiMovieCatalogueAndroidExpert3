@@ -8,7 +8,8 @@ public class DatabaseContract {
     public static final String AUTHORITY = "com.alfin.aplikasimoviecatalogueandroidexpert3";
     private static final String SCHEME = "content";
 
-    private DatabaseContract(){}
+    private DatabaseContract() {
+    }
 
     public static final class MovieTvShowColumns implements BaseColumns {
         public static final String TABLE_NAME = "mts";

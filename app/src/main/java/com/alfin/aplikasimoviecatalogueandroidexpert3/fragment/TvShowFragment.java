@@ -16,13 +16,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieAdapter;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.TvShowAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieViewModel;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.TvShowViewModel;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.model.Movie;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.TvShow;
 

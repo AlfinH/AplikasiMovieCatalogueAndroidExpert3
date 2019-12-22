@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.MovieFragment;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.TvShowFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {

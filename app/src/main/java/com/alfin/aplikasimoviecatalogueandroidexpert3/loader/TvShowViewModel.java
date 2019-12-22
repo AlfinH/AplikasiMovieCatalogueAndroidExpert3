@@ -25,7 +25,7 @@ public class TvShowViewModel extends ViewModel {
     public void setTvShows(final String language) {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<TvShow> listItems = new ArrayList<>();
-        String url = "http://api.themoviedb.org/3/tv/top_rated?api_key=" + API_KEY + "&language="+language+"&page=1";
+        String url = "http://api.themoviedb.org/3/tv/top_rated?api_key=" + API_KEY + "&language=" + language + "&page=1";
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -44,12 +44,14 @@ public class TvShowViewModel extends ViewModel {
                     Log.d("Exception", e.getMessage());
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("onFailure", error.getMessage());
             }
         });
     }
+
     public LiveData<ArrayList<TvShow>> getTvShows() {
         return listTvShows;
     }

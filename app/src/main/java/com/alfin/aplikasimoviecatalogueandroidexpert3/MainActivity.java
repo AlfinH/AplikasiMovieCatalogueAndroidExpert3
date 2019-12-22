@@ -1,9 +1,5 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,7 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.SectionsPagerAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.LoadMovieTvShowsCallback;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
@@ -42,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsC
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_change_settings){
+        if (item.getItemId() == R.id.action_change_settings) {
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);
         }

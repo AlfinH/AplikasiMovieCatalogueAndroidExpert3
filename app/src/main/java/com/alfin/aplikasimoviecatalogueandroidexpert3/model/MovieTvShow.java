@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class MovieTvShow implements Parcelable {
     private int id;
-    private String gambar,judul,tanggal_rilis,genre,deskripsi;
+    private String gambar, judul, tanggal_rilis, genre, deskripsi;
 
     public MovieTvShow() {
     }

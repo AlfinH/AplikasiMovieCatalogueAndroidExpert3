@@ -25,7 +25,7 @@ public class MovieViewModel extends ViewModel {
     public void setMovies(final String language) {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItems = new ArrayList<>();
-        String url = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language="+language;
+        String url = "http://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=" + language;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -44,12 +44,14 @@ public class MovieViewModel extends ViewModel {
                     Log.d("Exception", e.getMessage());
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d("onFailure", error.getMessage());
             }
         });
     }
+
     public LiveData<ArrayList<Movie>> getMovies() {
         return listMovies;
     }

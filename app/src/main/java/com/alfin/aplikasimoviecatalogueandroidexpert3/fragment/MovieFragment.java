@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends Fragment{
+public class MovieFragment extends Fragment {
 
     private MovieAdapter adapter;
 
