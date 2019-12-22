@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.CustomOnItemClickListener;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
@@ -73,8 +74,8 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
         movieTvShowViewHolder.txtTanggal.setText(movieTvShow.getTanggal_rilis());
         movieTvShowViewHolder.txtDeskripsi.setText(movieTvShow.getDeskripsi());
         Glide.with(movieTvShowViewHolder.itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w342" + movieTvShow.getGambar())
-                .apply(new RequestOptions().override(100, 150))
+                .load(BuildConfig.BASE_URL_W342 + movieTvShow.getGambar())
+                .apply(new RequestOptions().placeholder(R.drawable.ic_error).error(R.drawable.ic_error).override(100, 150))
                 .into(movieTvShowViewHolder.imgGambar);
         movieTvShowViewHolder.rlMovieTvShow.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override

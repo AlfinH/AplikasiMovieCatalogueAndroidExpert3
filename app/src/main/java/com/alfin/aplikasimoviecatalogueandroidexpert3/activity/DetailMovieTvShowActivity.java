@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.helper.MappingHelper;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
@@ -83,8 +84,8 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
             txtTanggal.setText(movieTvShow.getTanggal_rilis());
             txtDeskripsi.setText(movieTvShow.getDeskripsi());
             Glide.with(getApplicationContext())
-                    .load("https://image.tmdb.org/t/p/original" + movieTvShow.getGambar())
-                    .apply(new RequestOptions().override(175, 250))
+                    .load(BuildConfig.BASE_URL_ORI + movieTvShow.getGambar())
+                    .apply(new RequestOptions().placeholder(R.drawable.ic_error).error(R.drawable.ic_error).override(175, 250))
                     .into(imgGambar);
         }
     }

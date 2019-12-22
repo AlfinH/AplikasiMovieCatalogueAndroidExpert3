@@ -37,12 +37,6 @@ public class TvShowViewModel extends ViewModel {
                         JSONObject tvShow = list.getJSONObject(i);
                         TvShow tvShowItems = new TvShow(tvShow);
 
-//                        tvShowItems.setId(tvShow.getInt("id"));
-//                        tvShowItems.setGambar("https://image.tmdb.org/t/p/w185" + tvShow.getString("poster_path"));
-//                        tvShowItems.setJudul(tvShow.getString("title"));
-//                        tvShowItems.setTanggal_rilis(tvShow.getString("release_date"));
-//                        tvShowItems.setDeskripsi(tvShow.getString("overview"));
-
                         listItems.add(tvShowItems);
                     }
                     listTvShows.postValue(listItems);

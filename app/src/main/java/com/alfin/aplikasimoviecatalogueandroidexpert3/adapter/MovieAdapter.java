@@ -58,7 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movieViewHolder.txtDeskripsi.setText(movie.getDeskripsi());
         Glide.with(movieViewHolder.itemView.getContext())
                 .load("https://image.tmdb.org/t/p/w342" + movie.getGambar())
-                .apply(new RequestOptions().override(100, 150))
+                .apply(new RequestOptions().placeholder(R.drawable.ic_error).error(R.drawable.ic_error).override(100, 150))
                 .into(movieViewHolder.imgGambar);
 
         movieViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

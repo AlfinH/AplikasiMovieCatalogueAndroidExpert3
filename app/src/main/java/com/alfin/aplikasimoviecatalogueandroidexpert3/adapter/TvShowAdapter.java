@@ -60,7 +60,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
         tvShowViewHolder.txtDeskripsi.setText(tvShow.getDeskripsi());
         Glide.with(tvShowViewHolder.itemView.getContext())
                 .load("https://image.tmdb.org/t/p/w342" + tvShow.getGambar())
-                .apply(new RequestOptions().override(100, 150))
+                .apply(new RequestOptions().placeholder(R.drawable.ic_error).error(R.drawable.ic_error).override(100, 150))
                 .into(tvShowViewHolder.imgGambar);
 
         tvShowViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
