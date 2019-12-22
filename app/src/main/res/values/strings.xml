@@ -15,4 +15,7 @@
 
     <string name="language">en-US</string>
 
+    <string name="teks_favorite_tambah">one item added successfully</string>
+    <string name="teks_favorite_hapus">one item successfully deleted</string>
+
 </resources>

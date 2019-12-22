@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DetailMovieTvShowActivity"/>
+        <provider
+            android:name=".provider.MovieTvShowProvider"
+            android:authorities="com.alfin.aplikasimoviecatalogueandroidexpert3"
+            android:enabled="true"
+            android:exported="true"></provider>
+
+        <activity android:name=".activity.DetailMovieTvShowActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

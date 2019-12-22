@@ -87,7 +87,8 @@ public class TvShowFragment extends Fragment {
         Intent detailMovie = new Intent(getContext(), DetailMovieTvShowActivity.class);
 
         MovieTvShow movieTvShow = new MovieTvShow();
-        movieTvShow.setGambar("https://image.tmdb.org/t/p/original" + data.getGambar());
+        movieTvShow.setId(data.getId());
+        movieTvShow.setGambar(data.getGambar());
         movieTvShow.setJudul(data.getJudul());
         movieTvShow.setTanggal_rilis(data.getJudul());
         movieTvShow.setGenre(data.getGenre());

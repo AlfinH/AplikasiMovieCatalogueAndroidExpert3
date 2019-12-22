@@ -16,4 +16,7 @@
 
     <string name="language">id-ID</string>
 
+    <string name="teks_favorite_tambah">satu item berhasil ditambahkan</string>
+    <string name="teks_favorite_hapus">satu item berhasil dihapus</string>
+
 </resources>

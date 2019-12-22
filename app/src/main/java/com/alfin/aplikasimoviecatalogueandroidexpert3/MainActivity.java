@@ -11,9 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.SectionsPagerAdapter;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.LoadMovieTvShowsCallback;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +46,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(mIntent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void preExecute() {
+
+    }
+
+    @Override
+    public void postExecute(ArrayList<MovieTvShow> movieTvShows) {
+
     }
 }
