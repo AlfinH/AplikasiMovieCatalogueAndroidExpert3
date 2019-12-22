@@ -41,6 +41,9 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
     private Uri uriWithId;
     private MovieTvShow movieTvShow;
 
+    public static final int REQUEST_ADD = 100;
+    public static final int REQUEST_UPDATE = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +108,7 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
             case R.id.action_fav:
                 isFavorite = false;
                 getContentResolver().delete(uriWithId, null, null);
-                Toast.makeText(DetailMovieTvShowActivity.this, getResources().getString(R.string.teks_favorite_hapus), Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailMovieTvShowActivity.this, getResources().getString(R.string.teks_favorite_hapus), Toast.LENGTH_SHORT).show();
                 changeMenuIcon();
                 break;
             case R.id.action_fav_border:
@@ -120,7 +123,7 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
                 values.put(GENRE, movieTvShow.getGenre());
                 values.put(GAMBAR, movieTvShow.getGambar());
                 getContentResolver().insert(CONTENT_URI, values);
-                Toast.makeText(DetailMovieTvShowActivity.this, getResources().getString(R.string.teks_favorite_tambah), Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailMovieTvShowActivity.this, getResources().getString(R.string.teks_favorite_tambah), Toast.LENGTH_SHORT).show();
                 changeMenuIcon();
                 break;
             case android.R.id.home:

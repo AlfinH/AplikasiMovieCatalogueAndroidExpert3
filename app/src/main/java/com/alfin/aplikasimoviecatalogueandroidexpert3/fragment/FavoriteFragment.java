@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
@@ -40,9 +41,9 @@ import java.util.ArrayList;
  */
 public class FavoriteFragment extends Fragment implements LoadMovieTvShowsCallback{
 
-    private ProgressBar progressBar;
-    private RecyclerView rvMovieTvShow;
-    private MovieTvShowAdapter adapter;
+    public static ProgressBar progressBarFav;
+    public static RecyclerView rvMovieTvShow;
+    public static  MovieTvShowAdapter adapter;
 
     private static final String EXTRA_STATE = "EXTRA_STATE";
 
@@ -62,50 +63,26 @@ public class FavoriteFragment extends Fragment implements LoadMovieTvShowsCallba
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        progressBar = view.findViewById(R.id.progressBar);
+        progressBarFav = view.findViewById(R.id.progressBar);
         rvMovieTvShow = view.findViewById(R.id.rv_favorites);
         rvMovieTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMovieTvShow.setHasFixedSize(true);
         adapter = new MovieTvShowAdapter(getActivity());
-        adapter.notifyDataSetChanged();
         rvMovieTvShow.setAdapter(adapter);
-
-        adapter.setOnItemClickCallback(new MovieTvShowAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(MovieTvShow data) {
-                showSelectedMovieTvShow(data);
-            }
-        });
 
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
         DataObserver myObserver = new DataObserver(handler, getContext());
-        getContext().getContentResolver().registerContentObserver(DatabaseContract.MovieTvShowColumns.CONTENT_URI, true, myObserver);
+        getActivity().getContentResolver().registerContentObserver(DatabaseContract.MovieTvShowColumns.CONTENT_URI, true, myObserver);
 
         if (savedInstanceState == null) {
             new LoadMovieTvShowAsync(getContext(), this).execute();
         } else {
             ArrayList<MovieTvShow> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (list != null) {
-                adapter.setListNotes(list);
+                adapter.setListMovieTvShows(list);
             }
         }
-    }
-
-    private void showSelectedMovieTvShow(MovieTvShow data) {
-        Intent detailMovie = new Intent(getContext(), DetailMovieTvShowActivity.class);
-
-        MovieTvShow movieTvShow = new MovieTvShow();
-        movieTvShow.setId(data.getId());
-        movieTvShow.setGambar(data.getGambar());
-        movieTvShow.setJudul(data.getJudul());
-        movieTvShow.setTanggal_rilis(data.getJudul());
-        movieTvShow.setGenre(data.getGenre());
-        movieTvShow.setDeskripsi(data.getDeskripsi());
-
-        detailMovie.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW, movieTvShow);
-        startActivity(detailMovie);
     }
 
     @Override
@@ -119,18 +96,18 @@ public class FavoriteFragment extends Fragment implements LoadMovieTvShowsCallba
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar.setVisibility(View.VISIBLE);
+                progressBarFav.setVisibility(View.VISIBLE);
             }
         });
     }
 
     @Override
     public void postExecute(ArrayList<MovieTvShow> movieTvShows) {
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBarFav.setVisibility(View.INVISIBLE);
         if (movieTvShows.size() > 0) {
-            adapter.setListNotes(movieTvShows);
+            adapter.setListMovieTvShows(movieTvShows);
         } else {
-            adapter.setListNotes(new ArrayList<MovieTvShow>());
+            adapter.setListMovieTvShows(new ArrayList<MovieTvShow>());
             showSnackbarMessage("Tidak ada data saat ini");
         }
     }

@@ -9,13 +9,20 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.SectionsPagerAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.LoadMovieTvShowsCallback;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.adapter;
+import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.progressBarFav;
+import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.rvMovieTvShow;
 
 public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsCallback {
 
@@ -50,11 +57,26 @@ public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsC
 
     @Override
     public void preExecute() {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBarFav.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     public void postExecute(ArrayList<MovieTvShow> movieTvShows) {
+        progressBarFav.setVisibility(View.INVISIBLE);
+        if (movieTvShows.size() > 0) {
+            adapter.setListMovieTvShows(movieTvShows);
+        } else {
+            adapter.setListMovieTvShows(new ArrayList<MovieTvShow>());
+            showSnackbarMessage("Tidak ada data saat ini");
+        }
+    }
 
+    private void showSnackbarMessage(String message) {
+        Snackbar.make(rvMovieTvShow, message, Snackbar.LENGTH_SHORT).show();
     }
 }

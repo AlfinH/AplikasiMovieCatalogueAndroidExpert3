@@ -1,16 +1,20 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alfin.aplikasimoviecatalogueandroidexpert3.CustomOnItemClickListener;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -21,11 +25,6 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
     private final ArrayList<MovieTvShow> listMovieTvShows = new ArrayList<>();
     private final Activity activity;
 
-    private MovieTvShowAdapter.OnItemClickCallback onItemClickCallback;
-    public void setOnItemClickCallback(MovieTvShowAdapter.OnItemClickCallback onItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback;
-    }
-
     public MovieTvShowAdapter(Activity activity) {
         this.activity = activity;
     }
@@ -34,9 +33,9 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
         return listMovieTvShows;
     }
 
-    public void setListNotes(ArrayList<MovieTvShow> listMovieTvShows) {
+    public void setListMovieTvShows(ArrayList<MovieTvShow> listMovieTvShows) {
 
-        if (listMovieTvShows.size() > 0) {
+        if (listMovieTvShows.size() >= 0) {
             this.listMovieTvShows.clear();
         }
         this.listMovieTvShows.addAll(listMovieTvShows);
@@ -69,7 +68,7 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MovieTvShowViewHolder movieTvShowViewHolder, int position) {
-        MovieTvShow movieTvShow = listMovieTvShows.get(position);
+        final MovieTvShow movieTvShow = listMovieTvShows.get(position);
         movieTvShowViewHolder.txtJudul.setText(movieTvShow.getJudul());
         movieTvShowViewHolder.txtTanggal.setText(movieTvShow.getTanggal_rilis());
         movieTvShowViewHolder.txtDeskripsi.setText(movieTvShow.getDeskripsi());
@@ -77,13 +76,22 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
                 .load("https://image.tmdb.org/t/p/w342" + movieTvShow.getGambar())
                 .apply(new RequestOptions().override(100, 150))
                 .into(movieTvShowViewHolder.imgGambar);
-
-        movieTvShowViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        movieTvShowViewHolder.rlMovieTvShow.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
-            public void onClick(View v) {
-                onItemClickCallback.onItemClicked(listMovieTvShows.get(movieTvShowViewHolder.getAdapterPosition()));
+            public void onItemClicked(View view, int position) {
+                Intent detailMovie = new Intent(activity, DetailMovieTvShowActivity.class);
+
+                movieTvShow.setId(movieTvShow.getId());
+                movieTvShow.setGambar(movieTvShow.getGambar());
+                movieTvShow.setJudul(movieTvShow.getJudul());
+                movieTvShow.setTanggal_rilis(movieTvShow.getJudul());
+                movieTvShow.setGenre(movieTvShow.getGenre());
+                movieTvShow.setDeskripsi(movieTvShow.getDeskripsi());
+
+                detailMovie.putExtra(DetailMovieTvShowActivity.EXTRA_MOVIE_TVSHOW, movieTvShow);
+                activity.startActivityForResult(detailMovie, DetailMovieTvShowActivity.REQUEST_UPDATE);
             }
-        });
+        }));
     }
 
     @Override
@@ -96,6 +104,7 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
         private TextView txtTanggal;
         private TextView txtDeskripsi;
         private ImageView imgGambar;
+        private RelativeLayout rlMovieTvShow;
 
         MovieTvShowViewHolder(View itemView) {
             super(itemView);
@@ -103,10 +112,7 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
             txtJudul = itemView.findViewById(R.id.tv_judul);
             txtTanggal = itemView.findViewById(R.id.tv_tgl_rilis);
             txtDeskripsi = itemView.findViewById(R.id.tv_deskripsi);
+            rlMovieTvShow = itemView.findViewById(R.id.rl_item_movie_tvshow);
         }
-    }
-
-    public interface OnItemClickCallback {
-        void onItemClicked(MovieTvShow data);
     }
 }
