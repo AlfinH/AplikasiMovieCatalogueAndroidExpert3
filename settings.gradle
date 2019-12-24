@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':moshofavoriteapp'
 rootProject.name='AplikasiMovieCatalogueAndroidExpert3'
