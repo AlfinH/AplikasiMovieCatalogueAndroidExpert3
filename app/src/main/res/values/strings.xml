@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AplikasiMovieCatalogueAndroidExpert3</string>
+    <string name="app_name">MoSho App</string>
 
     <string name="tab_movie">Movie</string>
     <string name="tab_tv_show">Tv Show</string>
@@ -17,5 +17,9 @@
 
     <string name="teks_favorite_tambah">one item added successfully</string>
     <string name="teks_favorite_hapus">one item successfully deleted</string>
+    <string name="search">Search</string>
+    <string name="appwidget_text">Favorite Movie &amp; Tv Show</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_text">empty</string>
 
 </resources>

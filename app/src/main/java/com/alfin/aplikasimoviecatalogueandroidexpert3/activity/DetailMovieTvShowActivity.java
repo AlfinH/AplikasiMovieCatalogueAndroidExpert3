@@ -1,5 +1,7 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.activity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +18,7 @@ import com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.helper.MappingHelper;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
+import com.alfin.aplikasimoviecatalogueandroidexpert3.widget.FavoritesBannerWidget;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -135,6 +138,14 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
     private void changeMenuIcon() {
         menu.findItem(R.id.action_fav).setVisible(isFavorite);
         menu.findItem(R.id.action_fav_border).setVisible(!isFavorite);
+        updateAllWidgets();
     }
 
+    private void updateAllWidgets() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, FavoritesBannerWidget.class));
+        if (appWidgetIds.length > 0) {
+            new FavoritesBannerWidget().onUpdate(this, appWidgetManager, appWidgetIds);
+        }
+    }
 }

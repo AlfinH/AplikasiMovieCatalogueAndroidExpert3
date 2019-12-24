@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AplikasiMovieCatalogueAndroidExpert3</string>
+    <string name="app_name">MoSho App</string>
 
     <string name="tab_movie">Film</string>
     <string name="tab_tv_show">Tayangan Tv</string>
@@ -18,5 +18,9 @@
 
     <string name="teks_favorite_tambah">satu item berhasil ditambahkan</string>
     <string name="teks_favorite_hapus">satu item berhasil dihapus</string>
+    <string name="search">Pencarian</string>
+    <string name="appwidget_text">Favorit Film &amp; Tayangan Tv</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="empty_text">kosong</string>
 
 </resources>
