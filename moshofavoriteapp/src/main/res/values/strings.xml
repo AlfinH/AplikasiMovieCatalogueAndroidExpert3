@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">MoSho Favorite App</string>
+
+    <string name="tab_movie">Movie</string>
+    <string name="tab_tv_show">Tv Show</string>
+    <string name="tab_fav">Favorite</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_language_settings">setting</string>
+    <string name="judul">title</string>
+    <string name="tanggal_rilis">release_date</string>
+    <string name="dummy_text">asdfg</string>
+    <string name="genre">Genre</string>
+
+    <string name="language">en-US</string>
+
+    <string name="teks_favorite_tambah">one item added successfully</string>
+    <string name="teks_favorite_hapus">one item successfully deleted</string>
+    <string name="search">Search</string>
+    <string name="appwidget_text">Favorite Movie &amp; Tv Show</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_text">empty</string>
+
 </resources>

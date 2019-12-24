@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alfin.moshofavoriteapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="com.alfin.aplikasimoviecatalogueandroidexpert3.READ_DATABASE" />
+    <uses-permission android:name="com.alfin.aplikasimoviecatalogueandroidexpert3.WRITE_DATABASE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.DetailMovieTvShowActivity"/>
     </application>
 
 </manifest>

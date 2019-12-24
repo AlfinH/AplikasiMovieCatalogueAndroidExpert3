@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/rl_item_movie_tvshow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_gambar"
+        android:layout_margin="8dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/tv_judul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@id/iv_gambar"
+        android:text="@string/judul"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/tv_tgl_rilis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@id/iv_gambar"
+        android:layout_below="@id/tv_judul"
+        android:text="@string/tanggal_rilis"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/tv_deskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@id/iv_gambar"
+        android:layout_below="@id/tv_tgl_rilis"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="@string/dummy_text"/>
+
+</RelativeLayout>
