@@ -18,8 +18,19 @@
     <string name="teks_favorite_tambah">one item added successfully</string>
     <string name="teks_favorite_hapus">one item successfully deleted</string>
     <string name="search">Search</string>
+    <string name="search_hint">Search Movie/Tv Show</string>
+
     <string name="appwidget_text">Favorite Movie &amp; Tv Show</string>
     <string name="add_widget">Add widget</string>
     <string name="empty_text">empty</string>
+
+    <string name="tv_release">Release Reminder</string>
+    <string name="tv_release_info">Reminder showing the movie that released today</string>
+
+    <string name="tv_daily">Daily Reminder</string>
+    <string name="tv_daily_info">Reminder for return to app</string>
+
+    <string name="tv_language">Change Language</string>
+    <string name="tv_language_info">Change your app\'s language(English/Indonesia)</string>
 
 </resources>

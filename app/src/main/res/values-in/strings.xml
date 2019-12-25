@@ -19,8 +19,19 @@
     <string name="teks_favorite_tambah">satu item berhasil ditambahkan</string>
     <string name="teks_favorite_hapus">satu item berhasil dihapus</string>
     <string name="search">Pencarian</string>
+    <string name="search_hint">Pencarian Film/Tayangan Tv</string>
+
     <string name="appwidget_text">Favorit Film &amp; Tayangan Tv</string>
     <string name="add_widget">Tambah widget</string>
     <string name="empty_text">kosong</string>
+
+    <string name="tv_release">Pengingat Rilis</string>
+    <string name="tv_release_info">Pengingat film yang rilis hari ini</string>
+
+    <string name="tv_daily">Pengingat Harian</string>
+    <string name="tv_daily_info">Pengingat untuk kembali ke applikasi</string>
+
+    <string name="tv_language">Ganti Bahasa</string>
+    <string name="tv_language_info">Ganti bahasa aplikasimu (Inggris/Indonesia)</string>
 
 </resources>
