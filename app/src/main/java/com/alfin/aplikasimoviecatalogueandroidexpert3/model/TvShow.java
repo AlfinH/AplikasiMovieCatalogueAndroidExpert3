@@ -19,11 +19,10 @@ public class TvShow {
             String genre = "";
             JSONArray genreArr = object.getJSONArray("genre_ids");
             for (int i = 0; i < genreArr.length(); i++) {
-                if (i == 0) {
-                    genre += toGenre(genreArr.getInt(i));
-                } else {
-                    genre += ", " + toGenre(genreArr.getInt(i));
+                if (i != 0) {
+                    genre += ", ";
                 }
+                genre += toGenre(genreArr.getInt(i));
             }
 
             String deskripsi = object.getString("overview");
@@ -79,6 +78,15 @@ public class TvShow {
                 break;
             case 10766:
                 genre = "Soap";
+                break;
+            case 10767:
+                genre = "Talk";
+                break;
+            case 10768:
+                genre = "War & Politics";
+                break;
+            case 37:
+                genre = "Western";
                 break;
         }
         return genre;

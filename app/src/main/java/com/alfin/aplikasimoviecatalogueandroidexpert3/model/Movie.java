@@ -19,11 +19,10 @@ public class Movie {
             String genre = "";
             JSONArray genreArr = object.getJSONArray("genre_ids");
             for (int i = 0; i < genreArr.length(); i++) {
-                if (i == 0) {
-                    genre += toGenre(genreArr.getInt(i));
-                } else {
-                    genre += ", " + toGenre(genreArr.getInt(i));
+                if (i != 0) {
+                    genre += ", ";
                 }
+                genre += toGenre(genreArr.getInt(i));
             }
 
             String deskripsi = object.getString("overview");
@@ -80,6 +79,25 @@ public class Movie {
             case 9648:
                 genre = "Mystery";
                 break;
+            case 10749:
+                genre = "Romance";
+                break;
+            case 878:
+                genre = "Science Fiction";
+                break;
+            case 10770:
+                genre = "TV Movie";
+                break;
+            case 53:
+                genre = "Thriller";
+                break;
+            case 10752:
+                genre = "War";
+                break;
+            case 37:
+                genre = "Western";
+                break;
+
         }
         return genre;
     }

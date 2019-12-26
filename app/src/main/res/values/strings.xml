@@ -32,5 +32,6 @@
 
     <string name="tv_language">Change Language</string>
     <string name="tv_language_info">Change your app\'s language(English/Indonesia)</string>
+    <string name="click_search_icon_to_search">Tap search icon</string>
 
 </resources>

@@ -34,7 +34,6 @@ public class MovieFragment extends Fragment {
     private MovieAdapter adapter;
 
     private ProgressBar progressBar;
-    private MovieViewModel movieViewModel;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -66,7 +65,7 @@ public class MovieFragment extends Fragment {
             }
         });
 
-        movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
+        MovieViewModel movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
 
         movieViewModel.setMovies(getResources().getString(R.string.language));
         showLoading(true);

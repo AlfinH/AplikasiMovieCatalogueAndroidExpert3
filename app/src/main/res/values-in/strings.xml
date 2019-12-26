@@ -33,5 +33,6 @@
 
     <string name="tv_language">Ganti Bahasa</string>
     <string name="tv_language_info">Ganti bahasa aplikasimu (Inggris/Indonesia)</string>
+    <string name="click_search_icon_to_search">Ketuk ikon pencarian</string>
 
 </resources>
