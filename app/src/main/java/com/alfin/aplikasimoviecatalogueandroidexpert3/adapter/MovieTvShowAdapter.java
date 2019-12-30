@@ -36,10 +36,10 @@ public class MovieTvShowAdapter extends RecyclerView.Adapter<MovieTvShowAdapter.
 
     public void setListMovieTvShows(ArrayList<MovieTvShow> listMovieTvShows) {
 
-        if (listMovieTvShows.size() >= 0) {
-            this.listMovieTvShows.clear();
+        this.listMovieTvShows.clear();
+        if (listMovieTvShows.size() > 0) {
+            this.listMovieTvShows.addAll(listMovieTvShows);
         }
-        this.listMovieTvShows.addAll(listMovieTvShows);
 
         notifyDataSetChanged();
     }

@@ -34,4 +34,12 @@
     <string name="tv_language_info">Change your app\'s language(English/Indonesia)</string>
     <string name="click_search_icon_to_search">Tap search icon</string>
 
+    <string name="msg_daily_reminder">MoSho App is missing you</string>
+    <string name="daily_on">Daily alarm set up</string>
+    <string name="daily_off">Daily alarm off</string>
+
+    <string name="msg_today_reminder">Release Reminder</string>
+    <string name="today_on">Release alarm set up</string>
+    <string name="today_off">Release alarm off</string>
+
 </resources>

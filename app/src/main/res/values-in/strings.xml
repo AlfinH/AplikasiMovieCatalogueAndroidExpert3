@@ -35,4 +35,12 @@
     <string name="tv_language_info">Ganti bahasa aplikasimu (Inggris/Indonesia)</string>
     <string name="click_search_icon_to_search">Ketuk ikon pencarian</string>
 
+    <string name="msg_daily_reminder">MoSho App merindukan dirimu</string>
+    <string name="daily_on">Alarm harian hidup</string>
+    <string name="daily_off">Alarm harian mati</string>
+
+    <string name="msg_today_reminder">Pengingat Rilis</string>
+    <string name="today_on">Alarm rilis hidup</string>
+    <string name="today_off">Alarm rilis mati</string>
+
 </resources>

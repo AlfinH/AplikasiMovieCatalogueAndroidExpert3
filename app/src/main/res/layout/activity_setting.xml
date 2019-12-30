@@ -7,7 +7,7 @@
     tools:context=".activity.SettingActivity">
 
     <LinearLayout
-        android:id="@+id/upcoming_notif"
+        android:id="@+id/today_notif"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         </LinearLayout>
 
         <Switch
-            android:id="@+id/switch_upcoming"
+            android:id="@+id/switch_today"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -41,36 +41,40 @@
     </LinearLayout>
 
     <View
-        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#000"
-        android:layout_below="@id/upcoming_notif" />
+        android:layout_below="@id/today_notif"
+        android:layout_marginHorizontal="16dp"
+        android:background="#000" />
 
     <LinearLayout
         android:id="@+id/daily_notif"
-        android:layout_below="@id/upcoming_notif"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/today_notif"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_daily" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:text="@string/tv_daily"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_daily_info"/>
+                android:text="@string/tv_daily_info" />
 
         </LinearLayout>
 
@@ -78,8 +82,8 @@
             android:id="@+id/switch_daily"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <View
