@@ -1,9 +1,11 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.reminder;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -33,7 +35,7 @@ public class TodayService extends Service{
     private static final String TAG = "TodayService";
 
     public void startNotificationListener() {
-        Toast.makeText(this, "MyAlarmService.onCreate()", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.msg_today_reminder), Toast.LENGTH_LONG).show();
 
         //start's a new thread
         new Thread(new Runnable() {
@@ -70,17 +72,49 @@ public class TodayService extends Service{
         return null;
     }
 
-    public void ShowNotification(String title, String message, int notifId)
+    public void ShowNotification(ArrayList<Movie> arrayList, int notifId)
     {
+        String CHANNEL_ID = "Channel_2";
+        String CHANNEL_NAME = "DailyRelease channe2";
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
-        Notification notification = new NotificationCompat.Builder(getBaseContext(),"notification_id")
-                .setSmallIcon(R.drawable.ic_notifications_black)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setDefaults(NotificationCompat.DEFAULT_SOUND)
-                .setVibrate(new long[]{1000, 1000, 1000})
-                .build();
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+
+        inboxStyle.setBigContentTitle(getResources().getString(R.string.msg_today_reminder));
+        for(Movie movie: arrayList){
+            inboxStyle.addLine(movie.getJudul());
+        }
+        inboxStyle.setSummaryText("Total: "+arrayList.size() + getResources().getString(R.string.tab_movie));
+
+        Notification notification;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
+            notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notifications_black)
+                    .setContentTitle(getResources().getString(R.string.msg_today_reminder))
+                    .setContentText(getResources().getString(R.string.list_today_reminder))
+                    .setDefaults(NotificationCompat.DEFAULT_SOUND)
+                    .setStyle(inboxStyle)
+                    .setChannelId(CHANNEL_ID)
+                    .setVibrate(new long[]{1000, 1000, 1000})
+                    .build();
+            notificationManager.createNotificationChannel(channel);
+        }else{
+            notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_notifications_black)
+                    .setContentTitle(getResources().getString(R.string.msg_today_reminder))
+                    .setContentText(getResources().getString(R.string.list_today_reminder))
+                    .setDefaults(NotificationCompat.DEFAULT_SOUND)
+                    .setStyle(inboxStyle)
+                    .setVibrate(new long[]{1000, 1000, 1000})
+                    .build();
+        }
+
         notificationManager.notify(notifId, notification);
     }
 
@@ -96,14 +130,18 @@ public class TodayService extends Service{
 
                 Log.d(TAG, "Running");
                 AsyncHttpClient client = new AsyncHttpClient();
-//                String url = "http://api.openweathermap.org/data/2.5/weather?q=Jakarta&appid=3425bb47f2d95e79b886a29591900027";
+                //Test tanggal 26-12-2019
+//                String url = "http://api.themoviedb.org/3/discover/movie?api_key=" + TMDB_API_KEY
+//                        + "&primary_release_date.gte=2019-12-26&primary_release_date.lte=2019-12-26";
+
                 String url = "http://api.themoviedb.org/3/discover/movie?api_key=" + TMDB_API_KEY
                         + "&primary_release_date.gte=" + formatter.format(ts) + "&primary_release_date.lte=" + formatter.format(ts);
-                Log.e(TAG, "getCurrentWeather: "+url );
                 client.get(url, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                         try {
+                            int notifId = 200;
+                            ArrayList<Movie> movieArrayList = new ArrayList<>();
                             String result = new String(responseBody);
                             JSONObject responseObject = new JSONObject(result);
                             JSONArray list = responseObject.getJSONArray("results");
@@ -113,9 +151,9 @@ public class TodayService extends Service{
                                 if(movieItems.getDeskripsi().equals("")){
                                     movieItems.setDeskripsi("-");
                                 }
-                                int notifId = 100;
-                                ShowNotification( movieItems.getJudul(), movieItems.getDeskripsi(), notifId);
+                                movieArrayList.add(movieItems);
                             }
+                            ShowNotification( movieArrayList, notifId);
                         }catch (Exception e){
                             e.printStackTrace();
                         }

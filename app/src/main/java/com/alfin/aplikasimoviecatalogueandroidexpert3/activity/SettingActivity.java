@@ -78,7 +78,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     todaySwitch.setChecked(true);
                     appPreference.setToday(isToday);
                     alarmReceiver.setTodayAlarm(this, AlarmReceiver.TYPE_TODAY,
-                            "12:15", getResources().getString(R.string.msg_today_reminder));
+                            "8:00", getResources().getString(R.string.msg_today_reminder));
                 }else{
                     todaySwitch.setChecked(false);
                     appPreference.setToday(isToday);

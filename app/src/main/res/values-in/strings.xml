@@ -40,6 +40,7 @@
     <string name="daily_off">Alarm harian mati</string>
 
     <string name="msg_today_reminder">Pengingat Rilis</string>
+    <string name="list_today_reminder">Daftar film</string>
     <string name="today_on">Alarm rilis hidup</string>
     <string name="today_off">Alarm rilis mati</string>
 

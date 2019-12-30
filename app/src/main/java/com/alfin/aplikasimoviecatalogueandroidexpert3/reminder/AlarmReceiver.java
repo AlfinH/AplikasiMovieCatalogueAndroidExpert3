@@ -50,13 +50,15 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void showAlarmNotification(Context context, String title, String message, int notifId) {
-        String CHANNEL_ID = "Channel_1";
-        String CHANNEL_NAME = "AlarmManager channel";
+        String CHANNEL_ID1 = "Channel_1";
+        String CHANNEL_ID2 = "Channel_2";
+        String CHANNEL_NAME1 = "AlarmManager channe1";
+        String CHANNEL_NAME2 = "AlarmManager channe2";
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder;
         if (notifId == ID_TODAY) {
-            builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+            builder = new NotificationCompat.Builder(context, CHANNEL_ID2)
                     .setSmallIcon(R.drawable.ic_notifications_black)
                     .setContentTitle(title)
                     .setContentText(message)
@@ -64,12 +66,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                     .setSound(alarmSound);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                        CHANNEL_NAME,
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID2,
+                        CHANNEL_NAME2,
                         NotificationManager.IMPORTANCE_DEFAULT);
                 channel.enableVibration(true);
                 channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
-                builder.setChannelId(CHANNEL_ID);
+                builder.setChannelId(CHANNEL_ID2);
                 if (notificationManagerCompat != null) {
                     notificationManagerCompat.createNotificationChannel(channel);
                 }
@@ -79,7 +81,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notificationManagerCompat.notify(notifId, notification);
             }
         } else if (notifId == ID_REPEATING) {
-            builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+            builder = new NotificationCompat.Builder(context, CHANNEL_ID1)
                     .setSmallIcon(R.drawable.ic_access_time_black)
                     .setContentTitle(title)
                     .setContentText(message)
@@ -87,12 +89,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                     .setSound(alarmSound);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                        CHANNEL_NAME,
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID1,
+                        CHANNEL_NAME1,
                         NotificationManager.IMPORTANCE_DEFAULT);
                 channel.enableVibration(true);
                 channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
-                builder.setChannelId(CHANNEL_ID);
+                builder.setChannelId(CHANNEL_ID1);
                 if (notificationManagerCompat != null) {
                     notificationManagerCompat.createNotificationChannel(channel);
                 }
