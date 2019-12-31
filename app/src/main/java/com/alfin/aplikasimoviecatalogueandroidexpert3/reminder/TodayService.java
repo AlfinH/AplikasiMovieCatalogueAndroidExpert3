@@ -72,20 +72,12 @@ public class TodayService extends Service{
         return null;
     }
 
-    public void ShowNotification(ArrayList<Movie> arrayList, int notifId)
+    public void ShowNotification(Movie movie, int notifId)
     {
-        String CHANNEL_ID = "Channel_2";
-        String CHANNEL_NAME = "DailyRelease channe2";
+        String CHANNEL_ID = "Channel_2"+notifId;
+        String CHANNEL_NAME = "DailyRelease channe2"+notifId;
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
-
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
-        inboxStyle.setBigContentTitle(getResources().getString(R.string.msg_today_reminder));
-        for(Movie movie: arrayList){
-            inboxStyle.addLine(movie.getJudul());
-        }
-        inboxStyle.setSummaryText("Total: "+arrayList.size() + getResources().getString(R.string.tab_movie));
 
         Notification notification;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -96,10 +88,9 @@ public class TodayService extends Service{
             channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
             notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notifications_black)
-                    .setContentTitle(getResources().getString(R.string.msg_today_reminder))
-                    .setContentText(getResources().getString(R.string.list_today_reminder))
+                    .setContentTitle(movie.getJudul())
+                    .setContentText(movie.getDeskripsi())
                     .setDefaults(NotificationCompat.DEFAULT_SOUND)
-                    .setStyle(inboxStyle)
                     .setChannelId(CHANNEL_ID)
                     .setVibrate(new long[]{1000, 1000, 1000})
                     .build();
@@ -107,10 +98,9 @@ public class TodayService extends Service{
         }else{
             notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notifications_black)
-                    .setContentTitle(getResources().getString(R.string.msg_today_reminder))
-                    .setContentText(getResources().getString(R.string.list_today_reminder))
+                    .setContentTitle(movie.getJudul())
+                    .setContentText(movie.getDeskripsi())
                     .setDefaults(NotificationCompat.DEFAULT_SOUND)
-                    .setStyle(inboxStyle)
                     .setVibrate(new long[]{1000, 1000, 1000})
                     .build();
         }
@@ -141,7 +131,6 @@ public class TodayService extends Service{
                     public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, byte[] responseBody) {
                         try {
                             int notifId = 200;
-                            ArrayList<Movie> movieArrayList = new ArrayList<>();
                             String result = new String(responseBody);
                             JSONObject responseObject = new JSONObject(result);
                             JSONArray list = responseObject.getJSONArray("results");
@@ -151,9 +140,8 @@ public class TodayService extends Service{
                                 if(movieItems.getDeskripsi().equals("")){
                                     movieItems.setDeskripsi("-");
                                 }
-                                movieArrayList.add(movieItems);
+                                ShowNotification( movieItems, notifId+i);
                             }
-                            ShowNotification( movieArrayList, notifId);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
