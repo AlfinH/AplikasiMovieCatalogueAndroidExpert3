@@ -34,7 +34,7 @@ import java.util.ArrayList;
  */
 public class FavoriteFragment extends Fragment implements LoadMovieTvShowsCallback {
 
-    public static ProgressBar progressBarFav;
+    private static ProgressBar progressBarFav;
     public static RecyclerView rvMovieTvShow;
     public static MovieTvShowAdapter adapter;
 

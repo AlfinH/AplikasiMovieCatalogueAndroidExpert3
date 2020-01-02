@@ -17,7 +17,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.SettingActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -154,7 +153,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (isDateInvalid(time, TIME_FORMAT)) return;
         Intent myIntent = new Intent(context, TodayService.class);
         PendingIntent pendingIntent = PendingIntent.getService(context, ID_TODAY, myIntent, 0);
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         String[] timeArray = time.split(":");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));

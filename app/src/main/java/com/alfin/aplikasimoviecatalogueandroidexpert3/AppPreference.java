@@ -16,21 +16,21 @@ public class AppPreference {
         editor = preferences.edit();
     }
 
-    public void setToday(boolean status){
+    public void setToday(boolean status) {
         editor.putBoolean(KEY_TODAY, status);
         editor.apply();
     }
 
-    public void setDaily(boolean status){
+    public void setDaily(boolean status) {
         editor.putBoolean(KEY_DAILY, status);
         editor.apply();
     }
 
-    public boolean isToday(){
-        return preferences.getBoolean(KEY_TODAY,false);
+    public boolean isToday() {
+        return preferences.getBoolean(KEY_TODAY, false);
     }
 
-    public boolean isDaily(){
+    public boolean isDaily() {
         return preferences.getBoolean(KEY_DAILY, false);
     }
 }

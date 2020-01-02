@@ -7,7 +7,6 @@
     <string name="tab_fav">Favorit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Halo fragment kosong</string>
     <string name="change_language_settings">pengaturan</string>
     <string name="judul">judul</string>
     <string name="tanggal_rilis">tgl_rilis</string>
@@ -22,7 +21,6 @@
     <string name="search_hint">Pencarian Film/Tayangan Tv</string>
 
     <string name="appwidget_text">Favorit Film &amp; Tayangan Tv</string>
-    <string name="add_widget">Tambah widget</string>
     <string name="empty_text">kosong</string>
 
     <string name="tv_release">Pengingat Rilis</string>
@@ -40,8 +38,5 @@
     <string name="daily_off">Alarm harian mati</string>
 
     <string name="msg_today_reminder">Pengingat Rilis</string>
-    <string name="list_today_reminder">Daftar film</string>
-    <string name="today_on">Alarm rilis hidup</string>
-    <string name="today_off">Alarm rilis mati</string>
 
 </resources>

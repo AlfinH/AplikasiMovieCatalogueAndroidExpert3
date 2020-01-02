@@ -54,7 +54,7 @@ public class FavoritesBannerWidget extends AppWidgetProvider {
         if (intent.getAction() != null) {
             if (intent.getAction().equals(TOAST_ACTION)) {
                 int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
-                Toast.makeText(context, "Item " + (viewIndex+1), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Item " + (viewIndex + 1), Toast.LENGTH_SHORT).show();
             }
         }
     }

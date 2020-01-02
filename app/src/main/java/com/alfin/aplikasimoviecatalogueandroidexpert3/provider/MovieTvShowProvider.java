@@ -90,7 +90,9 @@ public class MovieTvShowProvider extends ContentProvider {
                 break;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        }
 
         return Uri.parse(CONTENT_URI + "/" + added);
     }
@@ -108,7 +110,9 @@ public class MovieTvShowProvider extends ContentProvider {
                 break;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        }
 
         return updated;
     }
@@ -116,16 +120,15 @@ public class MovieTvShowProvider extends ContentProvider {
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         int deleted;
-        switch (sUriMatcher.match(uri)) {
-            case MOVIETVSHOW_ID:
-                deleted = movieTvShowHelper.deleteById(uri.getLastPathSegment());
-                break;
-            default:
-                deleted = 0;
-                break;
+        if (sUriMatcher.match(uri) == MOVIETVSHOW_ID) {
+            deleted = movieTvShowHelper.deleteById(uri.getLastPathSegment());
+        } else {
+            deleted = 0;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(CONTENT_URI, null);
+        }
 
         return deleted;
     }

@@ -34,7 +34,10 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE_TVSHOW = "movie_tvshow";
 
-    private TextView txtJudul, txtGenre, txtTanggal, txtDeskripsi;
+    private TextView txtJudul;
+    private TextView txtGenre;
+    private TextView txtTanggal;
+    private TextView txtDeskripsi;
     private ImageView imgGambar;
 
     private Menu menu;
@@ -130,6 +133,8 @@ public class DetailMovieTvShowActivity extends AppCompatActivity {
                 break;
             case android.R.id.home:
                 finish();
+                break;
+            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

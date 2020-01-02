@@ -22,7 +22,7 @@ public class SearchViewModel extends ViewModel {
     private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private MutableLiveData<ArrayList<MovieTvShow>> listMovieTvShows = new MutableLiveData<>();
 
-    public void setSearchResults(final String language,final String input_string) {
+    public void setSearchResults(final String language, final String input_string) {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<MovieTvShow> listItems = new ArrayList<>();
         String url = "http://api.themoviedb.org/3/search/multi?api_key=" + API_KEY + "&language=" + language + "&query=" + input_string;

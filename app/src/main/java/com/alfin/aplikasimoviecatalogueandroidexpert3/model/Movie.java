@@ -114,16 +114,8 @@ public class Movie {
         return judul;
     }
 
-    public void setJudul(String judul) {
-        this.judul = judul;
-    }
-
     public String getTanggal_rilis() {
         return tanggal_rilis;
-    }
-
-    public void setTanggal_rilis(String tanggal_rilis) {
-        this.tanggal_rilis = tanggal_rilis;
     }
 
     public String getDeskripsi() {
@@ -138,15 +130,8 @@ public class Movie {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
     public String getGambar() {
         return gambar;
     }
 
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
-    }
 }

@@ -1,13 +1,13 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alfin.aplikasimoviecatalogueandroidexpert3.AppPreference;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
@@ -16,7 +16,7 @@ import com.alfin.aplikasimoviecatalogueandroidexpert3.reminder.AlarmReceiver;
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout llLanguage;
-    private Switch dailySwitch,todaySwitch;
+    private Switch dailySwitch, todaySwitch;
     private boolean isToday, isDaily;
     private AppPreference appPreference;
 
@@ -42,31 +42,31 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         setEnableDisableNotif();
     }
 
-    private void setEnableDisableNotif(){
-        if (appPreference.isDaily()){
+    private void setEnableDisableNotif() {
+        if (appPreference.isDaily()) {
             dailySwitch.setChecked(true);
-        }else {
+        } else {
             dailySwitch.setChecked(false);
         }
 
-        if (appPreference.isToday()){
+        if (appPreference.isToday()) {
             todaySwitch.setChecked(true);
-        }else {
+        } else {
             todaySwitch.setChecked(false);
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.switch_daily:
                 isDaily = dailySwitch.isChecked();
-                if(isDaily){
+                if (isDaily) {
                     dailySwitch.setChecked(true);
                     appPreference.setDaily(isDaily);
                     alarmReceiver.setRepeatingAlarm(this, AlarmReceiver.TYPE_REPEATING,
                             "7:00", getResources().getString(R.string.msg_daily_reminder));
-                }else{
+                } else {
                     dailySwitch.setChecked(false);
                     appPreference.setDaily(isDaily);
                     alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_REPEATING);
@@ -74,12 +74,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.switch_today:
                 isToday = todaySwitch.isChecked();
-                if(isToday){
+                if (isToday) {
                     todaySwitch.setChecked(true);
                     appPreference.setToday(isToday);
                     alarmReceiver.setTodayAlarm(this, AlarmReceiver.TYPE_TODAY,
                             "8:00", getResources().getString(R.string.msg_today_reminder));
-                }else{
+                } else {
                     todaySwitch.setChecked(false);
                     appPreference.setToday(isToday);
                     alarmReceiver.cancelTodayAlarm(this, AlarmReceiver.TYPE_TODAY);

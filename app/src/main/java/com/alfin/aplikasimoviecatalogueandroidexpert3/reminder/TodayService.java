@@ -24,14 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import static com.alfin.aplikasimoviecatalogueandroidexpert3.BuildConfig.TMDB_API_KEY;
 
-public class TodayService extends Service{
+public class TodayService extends Service {
     private static final String TAG = "TodayService";
 
     public void startNotificationListener() {
@@ -50,19 +48,18 @@ public class TodayService extends Service{
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         startNotificationListener();
         super.onCreate();
     }
+
     @Override
-    public int onStartCommand(Intent intent,int flags,int startId)
-    {
-        return super.onStartCommand(intent,flags,startId);
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
+
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
     }
 
@@ -72,10 +69,9 @@ public class TodayService extends Service{
         return null;
     }
 
-    public void ShowNotification(Movie movie, int notifId)
-    {
-        String CHANNEL_ID = "Channel_2"+notifId;
-        String CHANNEL_NAME = "DailyRelease channe2"+notifId;
+    public void ShowNotification(Movie movie, int notifId) {
+        String CHANNEL_ID = "Channel_2" + notifId;
+        String CHANNEL_NAME = "DailyRelease channe2" + notifId;
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
 
@@ -86,7 +82,7 @@ public class TodayService extends Service{
                     NotificationManager.IMPORTANCE_DEFAULT);
             channel.enableVibration(true);
             channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
-            notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
+            notification = new NotificationCompat.Builder(getBaseContext(), CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notifications_black)
                     .setContentTitle(movie.getJudul())
                     .setContentText(movie.getDeskripsi())
@@ -95,8 +91,8 @@ public class TodayService extends Service{
                     .setVibrate(new long[]{1000, 1000, 1000})
                     .build();
             notificationManager.createNotificationChannel(channel);
-        }else{
-            notification = new NotificationCompat.Builder(getBaseContext(),CHANNEL_ID)
+        } else {
+            notification = new NotificationCompat.Builder(getBaseContext(), CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notifications_black)
                     .setContentTitle(movie.getJudul())
                     .setContentText(movie.getDeskripsi())
@@ -108,14 +104,14 @@ public class TodayService extends Service{
         notificationManager.notify(notifId, notification);
     }
 
-    private void getCurrentWeather(){
+    private void getCurrentWeather() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
                 //Code that uses AsyncHttpClient
                 Date date = new Date();
-                Timestamp ts=new Timestamp(date.getTime());
+                Timestamp ts = new Timestamp(date.getTime());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
                 Log.d(TAG, "Running");
@@ -137,12 +133,12 @@ public class TodayService extends Service{
                             for (int i = 0; i < list.length(); i++) {
                                 JSONObject movie = list.getJSONObject(i);
                                 Movie movieItems = new Movie(movie);
-                                if(movieItems.getDeskripsi().equals("")){
+                                if (movieItems.getDeskripsi().equals("")) {
                                     movieItems.setDeskripsi("-");
                                 }
-                                ShowNotification( movieItems, notifId+i);
+                                ShowNotification(movieItems, notifId + i);
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

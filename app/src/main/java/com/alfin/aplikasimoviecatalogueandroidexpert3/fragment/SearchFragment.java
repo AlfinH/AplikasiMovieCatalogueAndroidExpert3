@@ -1,10 +1,12 @@
 package com.alfin.aplikasimoviecatalogueandroidexpert3.fragment;
 
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,31 +17,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.alfin.aplikasimoviecatalogueandroidexpert3.MainActivity;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.R;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.activity.DetailMovieTvShowActivity;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.MovieTvShowAdapter;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.SearchResultAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.adapter.TvShowAdapter;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.MovieViewModel;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.loader.SearchViewModel;
-import com.alfin.aplikasimoviecatalogueandroidexpert3.model.Movie;
 import com.alfin.aplikasimoviecatalogueandroidexpert3.model.MovieTvShow;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -113,7 +97,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
         searchViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(SearchViewModel.class);
 
-        searchViewModel.setSearchResults(getResources().getString(R.string.language),input_movie);
+        searchViewModel.setSearchResults(getResources().getString(R.string.language), input_movie);
         showLoading(true);
 
         searchViewModel.getMovieTvShows().observe(this, new Observer<ArrayList<MovieTvShow>>() {

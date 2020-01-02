@@ -6,7 +6,6 @@
     <string name="tab_fav">Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="change_language_settings">setting</string>
     <string name="judul">title</string>
     <string name="tanggal_rilis">release_date</string>
@@ -21,7 +20,6 @@
     <string name="search_hint">Search Movie/Tv Show</string>
 
     <string name="appwidget_text">Favorite Movie &amp; Tv Show</string>
-    <string name="add_widget">Add widget</string>
     <string name="empty_text">empty</string>
 
     <string name="tv_release">Release Reminder</string>
@@ -39,8 +37,5 @@
     <string name="daily_off">Daily alarm off</string>
 
     <string name="msg_today_reminder">Release Reminder</string>
-    <string name="list_today_reminder">Movies list</string>
-    <string name="today_on">Release alarm set up</string>
-    <string name="today_off">Release alarm off</string>
 
 </resources>

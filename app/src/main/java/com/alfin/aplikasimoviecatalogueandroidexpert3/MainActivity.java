@@ -2,10 +2,8 @@ package com.alfin.aplikasimoviecatalogueandroidexpert3;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +19,6 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.adapter;
-import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.progressBarFav;
 import static com.alfin.aplikasimoviecatalogueandroidexpert3.fragment.FavoriteFragment.rvMovieTvShow;
 
 public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsCallback {
@@ -57,17 +54,10 @@ public class MainActivity extends AppCompatActivity implements LoadMovieTvShowsC
 
     @Override
     public void preExecute() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBarFav.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     @Override
     public void postExecute(ArrayList<MovieTvShow> movieTvShows) {
-        progressBarFav.setVisibility(View.INVISIBLE);
         if (movieTvShows.size() > 0) {
             adapter.setListMovieTvShows(movieTvShows);
         } else {
